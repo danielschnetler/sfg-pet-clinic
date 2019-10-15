@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.springdatajpa;
+package guru.springframework.sfgpetclinic.services.springdatajpa;
 
 import java.util.HashSet;
 import java.util.Optional;
