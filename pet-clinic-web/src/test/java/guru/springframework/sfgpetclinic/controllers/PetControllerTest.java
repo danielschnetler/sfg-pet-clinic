@@ -80,7 +80,7 @@ class PetControllerTest {
 		
 		mockMvc.perform(MockMvcRequestBuilders.post("/owners/1/pets/new"))
 			.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-			.andExpect(MockMvcResultMatchers.view().name("redirect:/owners/1/pets"));
+			.andExpect(MockMvcResultMatchers.view().name("redirect:/owners/1"));
 			
 		verify(petService, times(1)).save(ArgumentMatchers.any());
 	}
@@ -106,7 +106,7 @@ class PetControllerTest {
 		
 		mockMvc.perform(MockMvcRequestBuilders.post("/owners/1/pet/1/edit"))
 				.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-				.andExpect(MockMvcResultMatchers.view().name("redirect:/owners/1/pets"));
+				.andExpect(MockMvcResultMatchers.view().name("redirect:/owners/1"));
 		
 		verify(petService, times(1)).save(ArgumentMatchers.any());
 	}
