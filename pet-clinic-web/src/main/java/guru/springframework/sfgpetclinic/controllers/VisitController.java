@@ -1,5 +1,8 @@
 package guru.springframework.sfgpetclinic.controllers;
 
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -29,8 +32,15 @@ public class VisitController {
 	}
 
 	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
+	public void dataBinder(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
+
+		dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) throws IllegalArgumentException {
+				setValue(LocalDate.parse(text));
+			}
+		});
 	}
 
 	@ModelAttribute("visit")
@@ -50,12 +60,12 @@ public class VisitController {
 
 	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
 	public String processNewVisitForm(@Valid Visit visit, BindingResult result, @PathVariable Long ownerId) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		} else {
 			visitService.save(visit);
-			return "redirect:/owners/" + ownerId; 
+			return "redirect:/owners/" + ownerId;
 		}
-		
+
 	}
 }
