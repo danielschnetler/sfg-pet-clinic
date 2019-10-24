@@ -91,7 +91,7 @@ class PetControllerTest {
 		when(ownerService.findById(ArgumentMatchers.anyLong())).thenReturn(owner);
 		when(petService.findById(ArgumentMatchers.anyLong())).thenReturn(Pet.builder().id(1L).build());
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/owners/1/pet/1/edit"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/owners/1/pets/1/edit"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.model().attributeExists("owner"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("pet"))
@@ -104,7 +104,7 @@ class PetControllerTest {
 		when(petTypeService.findAll()).thenReturn(petTypes);
 		when(ownerService.findById(ArgumentMatchers.anyLong())).thenReturn(owner);
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/owners/1/pet/1/edit"))
+		mockMvc.perform(MockMvcRequestBuilders.post("/owners/1/pets/1/edit"))
 				.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
 				.andExpect(MockMvcResultMatchers.view().name("redirect:/owners/1"));
 		

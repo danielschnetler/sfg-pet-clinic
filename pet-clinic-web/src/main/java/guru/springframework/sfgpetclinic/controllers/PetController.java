@@ -97,14 +97,14 @@ public class PetController {
 
 	}
 
-	@GetMapping("/pet/{petId}/edit")
+	@GetMapping("/pets/{petId}/edit")
 	public String initUpdateForm(@PathVariable Long petId, Model model) {
 		Pet pet = petService.findById(petId);
 		model.addAttribute("pet", pet);
 		return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 	}
 
-	@PostMapping("/pet/{petId}/edit")
+	@PostMapping("/pets/{petId}/edit")
 	public String processUpdateForm(@PathVariable Long petId, Owner owner, @Valid Pet pet, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			pet.setOwner(owner);
